@@ -9,6 +9,8 @@ import {
   Route
 } from "react-router-dom";
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 class App extends React.Component {
   render() {
     return (
