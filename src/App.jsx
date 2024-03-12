@@ -4,7 +4,7 @@ import Footer from './Footer';
 import BestBooks from './BestBooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Main from './Main.jsx';
+import Main from './main.jsx';
 import About from './About.jsx';
 
 function App() {
