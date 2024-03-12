@@ -2,41 +2,42 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
+import About from './About';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Main from './main.jsx';
-import About from './About.jsx';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
-function App() {
-  return (
-    <Router>
-      <div>
+class App extends React.Component {
+  render() {
+    return (
+      <>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
         </nav>
-
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+        <Router>
+          <Header />
+          <Routes>
+            <Route 
+              exact path="/"
+              element={<BestBooks />}
+            >
+            </Route>
+            <Route 
+              exact path="/about"
+              element={<About />}
+            >
+            </Route>
+          </Routes>
+          <Footer />
+        </Router>
+      </>
+    )
+  }
 }
 
 export default App;
-
 
 
 
