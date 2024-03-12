@@ -1,55 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
+import Carousel from 'react-bootstrap/Carousel';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Main from './Main.jsx';
-import About from './About.jsx';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <Router>
+          <Header />
+          <Routes>
+            <Route 
+              exact path="/"
+              element={<BestBooks />}
+            >
+            </Route>
+            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
+          </Routes>
+          <Footer />
+        </Router>
+      </>
+    )
+  }
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
