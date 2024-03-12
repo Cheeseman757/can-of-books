@@ -5,11 +5,7 @@ import BestBooks from './BestBooks';
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+
 
 class App extends React.Component {
   render() {
