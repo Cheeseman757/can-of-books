@@ -1,50 +1,61 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import React, { Component } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Carousel } from 'react-bootstrap';
 
-function BestBooks()  {
+class BestBooks extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    };
+  }
 
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/books')
+  componentDidMount() {
+    // Make a GET request to the server's /books route
+    axios.get('/books')
       .then(response => {
-        console.log(response.data);
-        setData(response.data);
+        // Store the book data in the application state
+        this.setState({ books: response.data });
       })
-      .catch(error => console.error('There was an error!', error));
-  }, []); // Empty array means this effect runs once after the initial render
+      .catch(error => {
+        console.error('Error fetching books:', error);
+      });
+  }
 
-  return (
-    <div>
-      <h1>Data from API:</h1>
-      <Carousel>
-      {
-      data.length > 0 
-      ?
-        data.map((book, idx) => (
-          <Carousel.Item key={idx}>
-          <div>
-            <p>
-              {book.title}
-            </p>
-            <p>
-              {book.description}
-            </p>
-            <p>
-              {book.status ? 'Read' : 'Unread'}
-            </p>
-          </div>
-          </Carousel.Item>
-        ))
-      :
-      <p>No results found</p>
-      }
-    </Carousel>
-    </div>
-  );
+  renderBooks() {
+    // Check if there are more than 0 books stored in the application state
+    if (this.state.books.length > 0) {
+      // Render Bootstrap Carousel with books
+      return (
+        <Carousel>
+          {this.state.books.map(book => (
+            <Carousel.Item key={book.id}>
+              <img
+                className="d-block w-100"
+                src={book.imageUrl}
+                alt={book.title}
+              />
+              <Carousel.Caption>
+                <h3>{book.title}</h3>
+                <p>{book.author}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      );
+    } else {
+      // Render message when no books are available
+      return <p>Book collection is empty.</p>;
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderBooks()}
+      </div>
+    );
+  }
 }
 
 export default BestBooks;
