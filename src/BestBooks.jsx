@@ -1,64 +1,50 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {useState, useEffect} from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
-class BestBooks extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: []
-    }
-  }
+function BestBooks()  {
 
-  componentDidMount() {
-    // Make a GET request to your server's /books route
-    fetch('/books')
-      .then(response => response.json())
-      .then(data => {
-        // Store the book data returned from the server in the application state
-        this.setState({ books: data });
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/books')
+      .then(response => {
+        console.log(response.data);
+        setData(response.data);
       })
-      .catch(error => console.error('Error fetching books:', error));
-  }
+      .catch(error => console.error('There was an error!', error));
+  }, []); // Empty array means this effect runs once after the initial render
 
-  render() {
-    return (
-      <>
-        <h2>My Essential Lifelong Learning & Formation Shelf</h2>
-
-        {this.state.books.length > 0 ? (
-          // Render books using Bootstrap carousel with unique styling
-          <div id="bookCarousel" className="carousel slide my-carousel" data-bs-ride="carousel">
-            <div className="carousel-inner">
-              {this.state.books.map((book, index) => (
-                <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                  <img src={book.imageUrl} className="d-block w-100 my-carousel-image" alt={book.title} />
-                  <div className="carousel-caption my-carousel-caption">
-                    <h5>{book.title}</h5>
-                    <p>{book.author}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <button className="carousel-control-prev my-carousel-control" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next my-carousel-control" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Next</span>
-            </button>
+  return (
+    <div>
+      <h1>Data from API:</h1>
+      <Carousel>
+      {
+      data.length > 0 
+      ?
+        data.map((book, idx) => (
+          <Carousel.Item key={idx}>
+          <div>
+            <p>
+              {book.title}
+            </p>
+            <p>
+              {book.description}
+            </p>
+            <p>
+              {book.status ? 'Read' : 'Unread'}
+            </p>
           </div>
-        ) : (
-          // Render a message if no books are found
-          <h3>No Books Found</h3>
-        )}
-
-        {/* Link to the About page */}
-        <Link to="./About" className="link-about">About</Link>
-      </>
-    )
-  }
+          </Carousel.Item>
+        ))
+      :
+      <p>No results found</p>
+      }
+    </Carousel>
+    </div>
+  );
 }
 
 export default BestBooks;
