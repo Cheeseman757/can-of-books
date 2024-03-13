@@ -7,8 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
-const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
-
+const SERVER_URL = import.meta.env.VITE_SERVER_URL; 
+const REACT_APP_BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URL;
 
 class BestBooks extends Component {
   constructor(props) {
