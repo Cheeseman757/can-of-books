@@ -13,6 +13,7 @@ class BestBooks extends Component {
   }
 
   componentDidMount() {
+    console.log('BEST BOOKS LOADING!!');
     // Make a GET request to the server's /books route
     axios.get(SERVER_URL + '/books')
       .then(response => {

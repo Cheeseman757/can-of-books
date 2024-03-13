@@ -5,7 +5,6 @@ import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
-const API_KEY = import.meta.env.VITE_API_KEY;
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
