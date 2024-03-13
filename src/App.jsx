@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -82,21 +82,20 @@ class About extends React.Component {
 }
 
 class App extends React.Component {
-
   render() {
     return (
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand href="/">My Favorite Books</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/about">About</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
           <hr />
           <Routes>
             <Route exact path="/" element={<BestBooks />} />
