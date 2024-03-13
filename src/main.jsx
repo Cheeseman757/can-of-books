@@ -21,4 +21,8 @@ root.render(
   </React.StrictMode>
 );
 
+<<<<<<< HEAD
 // export default main;
+=======
+// export default main;
+>>>>>>> 81d7cf865e1b259d742344e4a38dd21e793beabf
