@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -17,9 +18,11 @@ class BestBooks extends Component {
   }
 
   componentDidMount() {
+    console.log('Best Books Loaded!!!')
     // Make a GET request to the server's /books route
-    axios.get('/books')
+    axios.get(SERVER_URL + '/books')
       .then(response => {
+        console.log('BOOK DATA!!', response.data);
         // Store the book data in the application state
         this.setState({ books: response.data });
       })
@@ -38,7 +41,7 @@ class BestBooks extends Component {
             <Carousel.Item key={book.id}>
               <img
                 className="d-block w-100"
-                src={book.imageUrl}
+                src={`https://placehold.it/300x300`}
                 alt={book.title}
               />
               <Carousel.Caption>
@@ -79,6 +82,7 @@ class About extends React.Component {
 }
 
 class App extends React.Component {
+
   render() {
     return (
       <Router>
@@ -93,11 +97,11 @@ class App extends React.Component {
               </li>
             </ul>
           </nav>
-
           <hr />
-
-          <Route exact path="/" component={BestBooks} />
-          <Route path="/about" component={About} />
+          <Routes>
+            <Route exact path="/" element={<BestBooks />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
         </div>
       </Router>
     );
@@ -105,11 +109,6 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-
-
 
 
 
