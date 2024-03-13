@@ -1,27 +1,13 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import BestBooks from './BestBooks';
-<<<<<<< HEAD
-import Carousel from 'react-bootstrap/Carousel';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-=======
-import About from './About';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-=======
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+
+const API_KEY = import.meta.env.VITE_API_KEY;
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 
 class BestBooks extends Component {
   constructor(props) {
@@ -32,9 +18,11 @@ class BestBooks extends Component {
   }
 
   componentDidMount() {
+    console.log('Best Books Loaded!!!')
     // Make a GET request to the server's /books route
-    axios.get('/books')
+    axios.get(SERVER_URL + '/books')
       .then(response => {
+        console.log('BOOK DATA!!', response.data);
         // Store the book data in the application state
         this.setState({ books: response.data });
       })
@@ -53,7 +41,7 @@ class BestBooks extends Component {
             <Carousel.Item key={book.id}>
               <img
                 className="d-block w-100"
-                src={book.imageUrl}
+                src={`https://placehold.it/300x300`}
                 alt={book.title}
               />
               <Carousel.Caption>
@@ -92,42 +80,11 @@ class About extends React.Component {
     );
   }
 }
->>>>>>> ea105e780164264a800d0e9c93edb29fff57ee18
 
->>>>>>> e4a5ddfc3fdc178f2ef575b58bded8bff0e0c556
 class App extends React.Component {
+
   render() {
     return (
-<<<<<<< HEAD
-      <>
-<<<<<<< HEAD
-=======
-        <nav>
-        </nav>
->>>>>>> e4a5ddfc3fdc178f2ef575b58bded8bff0e0c556
-        <Router>
-          <Header />
-          <Routes>
-            <Route 
-              exact path="/"
-              element={<BestBooks />}
-            >
-            </Route>
-<<<<<<< HEAD
-            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
-=======
-            <Route 
-              exact path="/about"
-              element={<About />}
-            >
-            </Route>
->>>>>>> e4a5ddfc3fdc178f2ef575b58bded8bff0e0c556
-          </Routes>
-          <Footer />
-        </Router>
-      </>
-    )
-=======
       <Router>
         <div>
           <nav>
@@ -140,38 +97,15 @@ class App extends React.Component {
               </li>
             </ul>
           </nav>
-
           <hr />
-
-          <Route exact path="/" component={BestBooks} />
-          <Route path="/about" component={About} />
+          <Routes>
+            <Route exact path="/" element={<BestBooks />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
         </div>
       </Router>
     );
->>>>>>> ea105e780164264a800d0e9c93edb29fff57ee18
   }
 }
 
 export default App;
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-
->>>>>>> e4a5ddfc3fdc178f2ef575b58bded8bff0e0c556
-=======
->>>>>>> ea105e780164264a800d0e9c93edb29fff57ee18
