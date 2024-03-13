@@ -6,7 +6,6 @@ const  SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 
-
 class BestBooks extends Component {
   constructor(props) {
     super(props);
