@@ -5,8 +5,9 @@ import { Carousel, Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL; 
-// const REACT_APP_BACKEND_URL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+
 
 class BestBooks extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class BestBooks extends Component {
             <Carousel.Item key={book.id}>
               <img
                 className="d-block w-100"
-                src={`https://placehold.it/300x300`}
+                src={`https://placehold.it/200x200?text=${book.title}`} height="400" width="100%"
                 alt={book.title}
               />
               <Carousel.Caption>
@@ -107,3 +108,18 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
