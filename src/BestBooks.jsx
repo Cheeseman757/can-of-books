@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
 
-<<<<<<< HEAD
 const  SERVER_URL = import.meta.env.VITE_SERVER_URL;
-=======
 
 const  VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
->>>>>>> 55e68f3d39e13847f872fa36636d98ebc05fd919
+
 
 class BestBooks extends Component {
   constructor(props) {
