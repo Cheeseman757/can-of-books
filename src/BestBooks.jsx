@@ -1,66 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {useState, useEffect} from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import { Carousel } from 'react-bootstrap';
-
-const  SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import {Link} from 'react-router-dom';
 
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-class BestBooks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: [],
-    };
-  }
 
-  componentDidMount() {
-    console.log('BEST BOOKS LOADING!!');
-    // Make a GET request to the server's /books route
-    axios.get(SERVER_URL + '/books')
+function BestBooks(props)  {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    axios.get(`${SERVER_URL}/books`)
       .then(response => {
-        // Store the book data in the application state
-        this.setState({ books: response.data });
+        console.log(response.data);
+        props.setMovies(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching books:', error);
-      });
+      .catch(error => console.error('There was an error!', error));
+  }, []); // Empty array means this effect runs once after the initial render
+
+
+
+  const handleDelete = async (id) => {
+
+    await axios.delete(`${SERVER_URL}/books/${id}`);
+
   }
 
-  renderBooks() {
-    // Check if there are more than 0 books stored in the application state
-    if (this.state.books.length > 0) {
-      // Render Bootstrap Carousel with books
-      return (
-        <Carousel>
-          {this.state.books.map(book => (
-            <Carousel.Item key={book.id}>
-              <img
-                className="d-block w-100"
-                src={book.imageUrl}
-                alt={book.title}
-              />
-              <Carousel.Caption>
-                <h3>{book.title}</h3>
-                <p>{book.author}</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      );
-    } else {
-      // Render message when no books are available
-      return <p>Book collection is empty.</p>;
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        {this.renderBooks()}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h3>Our Books:</h3>
+      <Carousel style={{textAlign: 'center', height: '250px', backgroundColor: 'gray', paddingTop: '25px'}}>
+      {
+      props.movies.length > 0 
+      ?
+        props.movies.map((book, idx) => (
+          <Carousel.Item key={idx}>
+          <div>
+            <p>
+              {book.title}
+            </p>
+            <p>
+              {book.description}
+            </p>
+            <p>
+              {book.status ? 'Read' : 'Unread'}
+            </p>
+            <Button onClick={() => props.handleShow(book._id)}>Update</Button>
+            <Button onClick={() => handleDelete(book._id)}>Delete</Button>
+          </div>
+          </Carousel.Item>
+        ))
+      :
+      <p>No results found</p>
+      }
+    </Carousel>
+    <Button style={{margin: '30px'}} variant="primary" onClick={() => props.handleShow()}>
+        Add New Book
+    </Button>
+    </div>
+  );
 }
 
 export default BestBooks;
