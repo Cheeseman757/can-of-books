@@ -12,6 +12,10 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 function BestBooks(props)  {
   const [data, setData] = useState([])
   useEffect(() => {
+
+    ///////Add new code somehwere here
+    // modify axios.get to add the authorization
+    
     axios.get(`${SERVER_URL}/books`)
       .then(response => {
         console.log(response.data);
