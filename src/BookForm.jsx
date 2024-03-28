@@ -15,6 +15,18 @@ function BookForm({handleClose, bookId}) {
     let [status, setStatus] = useState(false);
     let [error, setError] = useState(null);
 
+    let {getIdTokenClaims} = useAuth0();
+
+    const fetchToken = async () => {
+      let response = await getIdTokenClaims();
+      console.log(response);
+      return response.__raw;
+    }
+
+
+
+
+
     // update
     const updateBook = async(bookID, values) => {
       let response = await axios.put(`${SERVER_URL}/books/${bookID}`, values);
