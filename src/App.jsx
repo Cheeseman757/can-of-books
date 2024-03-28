@@ -12,7 +12,7 @@ import {
   Route
 } from "react-router-dom";
 import BookFormModal from './BookFormModal';
-import LoginButton from './LoginButton.jsx';
+import AuthButtons from './auth/AuthButtons.jsx';
 import { useAuth0 } from "@auth0/auth0-react";
 
 
